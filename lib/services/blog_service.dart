@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class BlogService {
   List<Post> posts = [];
   List<User> users = [];
-  String baseURL = "https://jsonplaceholder.typicode.com";
+  String baseURL = "http://127.0.0.1:8000/";
   int userId = 0;
 
   Future<void> updatePosts(int id) async {
@@ -15,16 +15,12 @@ class BlogService {
   }
 
   Future<void> getPosts() async {
-    String finalUrl = baseURL;
-    if (userId == 0) {
-      finalUrl += '/posts';
-    } else {
-      finalUrl += "/users/$userId/posts";
-    }
-
-    var url = Uri.parse(finalUrl);
+    String apiUrl = "$baseURL/api";
+    String address = "$apiUrl/games";
+    var url = Uri.parse(address);
 
     var response = await http.get(url);
+
 
     List<dynamic> data = jsonDecode(response.body);
 
